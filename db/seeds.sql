@@ -29,10 +29,3 @@ VALUES
   ('John', 'Doe', 5, 1),
   ('Tom', 'Allen', 6, 3);
 
-
-
---   SELECT * FROM department;
-
--- SELECT * FROM role_description;
-
--- SELECT * FROM employee;
