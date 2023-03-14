@@ -49,9 +49,9 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 The following animation demonstrates the application functionality:
 
-![Employee Tracker](./Assets/12-sql-homework-demo-01.png)
+![Image 1](./Assets/12-sql-homework-demo-01.png)
 
-![Employee Tracker2](./Assets/Screenshot-challenge12.png)
+![Image 2](./Assets/Screenshot-challenge12.png)
 
 
 ## Installation
