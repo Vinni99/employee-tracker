@@ -1,4 +1,4 @@
-
+// Description: This file contains the code to run the application. It is the entry point to the application.
 const express = require('express');
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use((req, res) => {
   res.status(404).end();
 });
-
+// Connect to database and start the server  after the database connection is made  
 db.connect(err => {
     if (err) throw err;
     console.log('Database connected.');
@@ -29,7 +29,7 @@ db.connect(err => {
 
 
 // Start the prompt functions 
-
+// Prompt functions are called in the startPrompt function 
 function startPrompt() {
     inquirer.prompt({
             type: 'list',
@@ -37,7 +37,8 @@ function startPrompt() {
             message: 'What would you like to do?',
             choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Update An Employee Manager', 'Delete Department', 'Delete Role', 'Delete Employee', 'QuitApp'], 
 
-    }).then( answer => {
+   // Switch statement to call the functions based on the user's choice ...Also William helped me with this part of the code about the switch statement and case statements...
+        }).then( answer => {
         switch (answer.menu) {
             case 'View All Departments':
                 viewAllDepartments();
@@ -214,7 +215,8 @@ function addEmployee() {
             message: "Please enter the manager's id associated with the employee you want to add to the database. Enter ONLY numbers."
         }
 
-    ]).then(function (response) {
+    ])
+    .then(function (response) {
         db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [response.first_name, response.last_name, response.role_id, response.manager_id], function (err, data) {
             if (err) throw err;
             console.log('The new employee entered has been added successfully to the database.');
@@ -228,8 +230,8 @@ function addEmployee() {
                 startPrompt();
             });
         })
-});
-};
+    });
+ };
 
 // Update employee role
 function updateEmployeeRole() {
@@ -244,7 +246,8 @@ function updateEmployeeRole() {
             type: "number",
             message: "Please enter the new role number id associated with the employee you want to update in the database. Enter ONLY numbers."
         }
-    ]).then(function (response) {
+    ])
+    .then(function (response) {
         db.query("UPDATE employee SET role_id = ? WHERE first_name = ?", [response.role_id, response.first_name], function (err, data) {
             if (err) throw err;
             console.log('The new role entered has been added successfully to the database.');
@@ -274,7 +277,8 @@ function updateEmployeeManager() {
             type: "number",
             message: "Please enter the new manager's id number associated with the employee you want to update in the database. Enter ONLY numbers."
         }
-    ]).then(function (response) {
+    ])
+    .then(function (response) {
         db.query("UPDATE employee SET manager_id = ? WHERE first_name = ?", [response.manager_id, response.first_name], function (err, data) {
             if (err) throw err;
             console.log("The new manager's id entered has been added successfully to the database.");
@@ -299,7 +303,8 @@ function deleteDepartment() {
             type: "number",
             message: "Please enter the id of the department you want to delete from the database. Enter ONLY numbers."
         }
-    ]).then(function (response) {
+    ])
+    .then(function (response) {
         db.query("DELETE FROM department WHERE id = ?", [response.department_id], function (err, data) {
             if (err) throw err;
             console.log("The department entered has been deleted successfully from the database.");
@@ -324,7 +329,8 @@ function deleteRole() {
             type: "number",
             message: "Please enter the id of the role you want to delete from the database. Enter ONLY numbers."
         }
-    ]).then(function (response) {
+    ])
+    .then(function (response) {
         db.query("DELETE FROM role_description WHERE id = ?", [response.role_id], function (err, data) {
             if (err) throw err;
             console.log("The role entered has been deleted successfully from the database.");
@@ -349,7 +355,8 @@ function deleteEmployee() {
             type: "number",
             message: "Please enter the id of the employee you want to delete from the database. Enter ONLY numbers."
         }
-    ]).then(function (response) {
+    ])
+    .then(function (response) {
         db.query("DELETE FROM employee WHERE id = ?", [response.employee_id], function (err, data) {
             if (err) throw err;
             console.log("The employee entered has been deleted successfully from the database.");
@@ -365,7 +372,7 @@ function deleteEmployee() {
         })
 });
 };
- 
+// Quit app function  
 function quitApp() {
     console.log("Thank you for using the Employee Tracker. Goodbye!");
     process.exit();
