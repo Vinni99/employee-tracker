@@ -1,5 +1,2 @@
-.db/connection.js
-.package.json
-.package-lock.json
-.node_modules
-```
+db/connection.js
+node_modules
